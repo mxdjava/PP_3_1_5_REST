@@ -52,6 +52,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
+                // Указываем куда будет разрешен доступ пользователю с определённой ролью
                 .antMatchers("/", "/login").hasAnyRole("ADMIN", "USER")
                 .antMatchers("/user", "/logout").hasRole("USER")
                 .antMatchers("/admin", "/create", "/edit", "/delete", "/user", "/logout").hasRole("ADMIN")
