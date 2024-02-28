@@ -2,9 +2,79 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>This page for add a new user</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/style.css">
+
+    <title>Add a new user</title>
+
 </head>
+
+
+
 <body>
+<!-- Содержимое вкладки -->
+<div class="tab-content mt-3">
+    <!-- Вкладка добавления пользователя -->
+
+    <h4>Add new user</h4>
+    <div id="createFormContainer">
+        <div class="form">
+            <form action="#" method="POST" th:action="@{/admin/create}" th:object="${user}">
+                <div class="form-container">
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" id="username" name="username" th:field="*{username}"
+                               class="form-control"/>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="secondname">Last name</label>
+                        <input type="text" id="secondname" name="secondname" th:field="*{secondname}"
+                               class="form-control"/>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="age">Age</label>
+                        <input type="text" id="age" name="age" th:field="*{age}" class="form-control"/>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="text" id="email" name="email" th:field="*{email}" class="form-control"/>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" th:field="*{password}"
+                               class="form-control"/>
+                    </div>
+
+                    <div class="form-group role-group">
+                        <label for="roleSelect">Role</label>
+                        <select class="form-control" id="roleSelect" name="roles"
+                                multiple data-live-search="true">
+                            <option th:each="roles : ${role}" th:value="${roles.getId()}"
+                                    th:text="${roles.name.replace('ROLE_', '')}"></option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success">Add new user</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+<!-- <body>
 <form th:method="post" th:action="@{/admin/create}" th:object="${user}">
     <label for="username"> Input username: </label>
     <input type="text" id="username" name="username" th:field="*{username}"/>
@@ -37,5 +107,5 @@
 <form th:action="@{/logout}" method="post">
     <button type="submit">Log out</button>
 </form>
-</body>
+</body> -->
 </html>

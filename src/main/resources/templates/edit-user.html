@@ -3,9 +3,84 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/style.css">
+
   <title>Edit</title>
 </head>
 <body>
+
+<!-- Форма для отправки данных -->
+<form th:action="@{/admin/edit}" method="POST" th:object="${user}">
+  <div>
+    <div class="form-group">
+      <label for="userId"><strong>ID:</strong></label>
+      <input type="text" class="form-control" id="userId"
+             readonly th:value="${user.getId()}" name="id">
+    </div>
+
+    <div class="form-group">
+      <label for="username">First Name:</label>
+      <input type="text" class="form-control" id="username"
+             th:value="${user.getUsername()}" name="username">
+    </div>
+
+    <div class="form-group">
+      <label for="secondname">Last Name:</label>
+      <input type="text" class="form-control" id="secondname"
+             th:value="${user.getSecondname()}"
+             name="secondname">
+    </div>
+
+    <div class="form-group">
+      <label for="age">Age:</label>
+      <input type="text" class="form-control" id="age"
+             th:value="${user.getAge()}" name="age">
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input type="text" class="form-control" id="email"
+             th:value="${user.getEmail()}" name="email">
+    </div>
+
+    <div class="form-group">
+      <label for="password">Password:</label>
+      <input type="password" class="form-control"
+             id="password" th:value="${user.getPassword()}"
+             name="password">
+    </div>
+
+    <div class="form-group role-group">
+      <label for="roleSelect">Role</label>
+
+      <select class="form-control" id="roleSelect" name="roles"
+              multiple data-live-search="true">
+        <option th:each="roles : ${role}" th:value="${roles.getId()}"
+                th:text="${roles.name.replace('ROLE_', '')}"></option>
+      </select>
+    </div>
+    <br>
+    <div class="modal-footer">
+      <!-- Кнопки закрытия или сохранения -->
+      <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-label="Close">
+        Close
+      </button>
+      <button type="submit" class="btn btn-primary">Edit</button>
+    </div>
+  </div>
+</form>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+
+</body>
+
+
+<!-- <body>
 
 <h1> Edit user </h1>
 <form th:method="post" th:action="@{/admin/edit(id=${user.getId()})}" th:object="${user}">
@@ -42,5 +117,5 @@
   <button type="submit">Log out</button>
 </form>
 
-</body>
+</body> -->
 </html>
